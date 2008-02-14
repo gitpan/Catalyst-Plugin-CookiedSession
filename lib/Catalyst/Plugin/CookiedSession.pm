@@ -3,11 +3,11 @@ use strict;
 use warnings;
 use Catalyst::Exception;
 use Crypt::CBC;
-use JSON::XS;
+use JSON::XS::VersionOneAndTwo;
 use MIME::Base64;
 use NEXT;
 use base qw/Class::Accessor::Fast/;
-our $VERSION = '0.31';
+our $VERSION = '0.32';
 
 BEGIN {
     __PACKAGE__->mk_accessors(
@@ -40,7 +40,7 @@ sub prepare_cookies {
         my $ciphertext_base64   = $cookie->value;
         my $ciphertext_unbase64 = decode_base64($ciphertext_base64);
         my $json = $c->_cookiedsession_cipher->decrypt($ciphertext_unbase64);
-        $session = from_json($json);
+        $session = decode_json($json);
         $c->log->debug("CookiedSession: found cookie $name containing $json");
     } else {
         $c->log->debug("CookiedSession: found no cookie $name");
@@ -51,7 +51,7 @@ sub prepare_cookies {
 sub finalize_cookies {
     my $c                 = shift;
     my $session           = $c->_cookiedsession_session;
-    my $json              = to_json($session);
+    my $json              = encode_json($session);
     my $ciphertext        = $c->_cookiedsession_cipher->encrypt($json);
     my $ciphertext_base64 = encode_base64( $ciphertext, '' );
     my $name              = $c->_cookiedsession_name;
