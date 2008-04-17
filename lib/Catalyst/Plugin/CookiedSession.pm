@@ -7,7 +7,7 @@ use JSON::XS::VersionOneAndTwo;
 use MIME::Base64;
 use NEXT;
 use base qw/Class::Accessor::Fast/;
-our $VERSION = '0.32';
+our $VERSION = '0.33';
 
 BEGIN {
     __PACKAGE__->mk_accessors(
@@ -41,9 +41,10 @@ sub prepare_cookies {
         my $ciphertext_unbase64 = decode_base64($ciphertext_base64);
         my $json = $c->_cookiedsession_cipher->decrypt($ciphertext_unbase64);
         $session = decode_json($json);
-        $c->log->debug("CookiedSession: found cookie $name containing $json");
+        $c->log->debug("CookiedSession: found cookie $name containing $json")
+            if $c->debug;
     } else {
-        $c->log->debug("CookiedSession: found no cookie $name");
+        $c->log->debug("CookiedSession: found no cookie $name") if $c->debug;
     }
     $c->_cookiedsession_session($session);
 }
@@ -59,7 +60,8 @@ sub finalize_cookies {
         value   => $ciphertext_base64,
         expires => $c->_cookiedsession_expires
     };
-    $c->log->debug("CookiedSession: set cookie $name containing $json");
+    $c->log->debug("CookiedSession: set cookie $name containing $json")
+        if $c->debug;
     $c->NEXT::finalize_cookies(@_);
 }
 

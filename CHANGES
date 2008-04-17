@@ -1,5 +1,8 @@
 CHANGES file for Catalyst::Plugin::CookiedSession:
 
+0.33 Thu Apr 17 18:48:37 BST 2008
+  - remove debugging statements unless under debug mode
+
 0.32 Thu Feb 14 07:22:36 GMT 2008
   - use JSON::XS::VersionOneAndTwo
 
