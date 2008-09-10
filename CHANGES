@@ -1,5 +1,8 @@
 CHANGES file for Catalyst::Plugin::CookiedSession:
 
+0.34 Wed Sep 10 20:41:10 BST 2008
+  - added machine- and human-readable license 
+
 0.33 Thu Apr 17 18:48:37 BST 2008
   - remove debugging statements unless under debug mode
 

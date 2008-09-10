@@ -6,6 +6,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME         => 'Catalyst::Plugin::CookiedSession',
     VERSION_FROM => 'lib/Catalyst/Plugin/CookiedSession.pm',
+    ABSTRACT     => 'Store sessions in a browser cookie',
     AUTHOR       => 'Leon Brocard <acme@astray.com>',
     LICENSE      => 'perl',
     PREREQ_PM    => {

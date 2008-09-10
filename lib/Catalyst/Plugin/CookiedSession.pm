@@ -7,7 +7,7 @@ use JSON::XS::VersionOneAndTwo;
 use MIME::Base64;
 use NEXT;
 use base qw/Class::Accessor::Fast/;
-our $VERSION = '0.33';
+our $VERSION = '0.34';
 
 BEGIN {
     __PACKAGE__->mk_accessors(
@@ -134,6 +134,8 @@ Leon Brocard <acme@astray.com>.
 =head1 COPYRIGHT
 
 Copyright (C) 2008, Leon Brocard
+
+=head1 LICENSE
 
 This module is free software; you can redistribute it or modify it
 under the same terms as Perl itself.
